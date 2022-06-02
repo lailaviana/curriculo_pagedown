@@ -1,0 +1,193 @@
+---
+title: "Laila Viana's CV"
+author: Laila Viana
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: false
+output:
+  pagedown::html_resume:
+    css: [ 'dd_cv.css', 'custom.css','resume']
+    self_contained: true
+#knit: pagedown::chrome_print      
+---
+```{r metathis, echo=FALSE, message = FALSE, warning = FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "beatrizmilz/resume") %>% 
+  meta_social(
+    title = "Laila Viana CV",
+    description = paste(
+      "CV made with the packages RMarkdown, pagedown, datadrivencv."
+    ),
+    url = "https://beatrizmilz.github.io/resume/index.html",
+    image = "https://beatrizmilz.github.io/resume/img/share-card.png",
+    image_alt = paste(
+      "Beatriz Milz CV"
+    ),
+    og_type = "website",
+    og_author = "Beatriz Milz",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@beamilz"
+  )
+```
+<!-- inicio academic icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!-- final academic icons -->
+
+ 
+<!-- inicio font awesome -->
+<script src="https://kit.fontawesome.com/1f72d6921a.js" crossorigin="anonymous"></script>
+
+ 
+<!-- final font awesome -->
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis',
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+source("cv_printing_functions.r")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1d9JTogexP-g_WCEqoQV3H2ZHHrenUWqRmmN4l0JEiRA/edit?usp=sharing",  
+  pdf_mode = params$pdf_mode
+)
+
+
+
+CV$entries_data <- CV$entries_data %>% dplyr::filter(in_resume == TRUE)
+
+
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+
+<center>
+![Laila Viana](https://avatars.githubusercontent.com/u/89318961){width=80% style='border-radius: 50%;'}
+</center>
+
+### CONTACT
+<center>
+
+ <a href='https://www.researchgate.net/profile/Laila-Viana-Almeida' target='_blank'><i class="fab fa-researchgate"></i></a> <a href='mailto:lailavalmeida@gmail.com'><i class="fa fa-envelope"></i></a> <a href='https://github.com/lailaviana' target='_blank'><i class="fa fa-github"></i></a>  <a href='https://orcid.org/0000-0002-7957-2196' target='_blank'><i class="fab fa-orcid"></i></a> <a href='http://lattes.cnpq.br/1435560156885566' target='_blank'><i class="ai ai-lattes"></i></a>
+</center>
+
+<br>
+
+Professional with large experience in molecular biology and bioinformatics, working with next generation sequencing analysis, production of recombinant protein for serological diagnosis and primer design for molecular diagnosis. Contributes to scientific discussions within the research group, as well as to the communication of scientific data verbally, written and visually at conferences in the area and scientific journals.
+
+### LANGUAGES
+
+**Portuguese:** Native
+
+**English:** Advanced
+
+**Spanish:** Basic
+
+<br>
+
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](http://nickstrayer.me/datadrivencv/index.html).
+
+Last updated on `r Sys.Date()`. 
+
+
+Main
+================================================================================
+
+Laila Viana {#title}
+--------------------------------------------------------------------------------
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+Scientific publications {data-icon=newspaper} 
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('publications_journals')
+```
+
+
+
+::: aside
+
+Selected activities:
+
+### AWARDS
+
+<i class="fas fa-award"></i> WALTER COLLI Award 2018
+
+<i class="fas fa-award"></i> WALTER COLLI Award 2016
+
+<i class="fas fa-award"></i> Honorable Mention Award X-meeting 2016
+
+<i class="fas fa-award"></i> ZIGMAN BRENER Award 2015
+
+<i class="fas fa-award"></i> Academic Relevance - UFMG 2015
+
+<i class="fas fa-award"></i> Academic Relevance - UFMG 2014
+
+<br>
+
+
+### PROGRAMMING SKILLS
+
+<i class="fab fa-r-project"></i> `R`
+
+<i class="fa fa-area-chart" aria-hidden="true"></i> `tidyverse`
+ 
+<i class="fas fa-code-branch"></i> `Git`
+
+<i class="fab fa-github"></i> `GitHub`
+
+<i class="fab fa-markdown"></i> `RMarkdown` 
+
+<i class="fas fa-laptop"></i> `Bash`
+
+<i class="fab fa-python"></i> `Python`
+
+
+
+:::
+
+
+
+Courses {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('short_courses')
+```
+
+
+
